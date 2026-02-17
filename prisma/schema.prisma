@@ -1,0 +1,152 @@
+// This is your Prisma schema file
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  password      String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  redditAccounts RedditAccount[]
+  campaigns      Campaign[]
+  templates      Template[]
+  subscription   Subscription?
+}
+
+model RedditAccount {
+  id            String    @id @default(cuid())
+  userId        String
+  redditId      String    @unique
+  username      String
+  accessToken   String
+  refreshToken  String
+  isActive      Boolean   @default(true)
+  karma         Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments      Comment[]
+}
+
+model Campaign {
+  id            String    @id @default(cuid())
+  userId        String
+  name          String
+  keywords      String[]
+  subreddits    String[]
+  dailyLimit    Int       @default(10)
+  status        CampaignStatus @default(ACTIVE)
+  tone          String    @default("helpful")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments      Comment[]
+}
+
+model Comment {
+  id            String    @id @default(cuid())
+  campaignId     String
+  redditAccountId String
+  redditPostId  String
+  content       String
+  redditCommentId String?  @unique
+  postedAt      DateTime?
+  upvotes       Int       @default(0)
+  replies       Int       @default(0)
+  engagement    Int       @default(0)
+  status        CommentStatus @default(PENDING)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  campaign      Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  redditAccount RedditAccount @relation(fields: [redditAccountId], references: [id], onDelete: Cascade)
+}
+
+model Template {
+  id            String    @id @default(cuid())
+  userId        String
+  name          String
+  content       String
+  tone          String    @default("helpful")
+  variables     String[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum CampaignStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+enum CommentStatus {
+  PENDING
+  POSTED
+  FAILED
+  FLAGGED
+}
+
+enum SubscriptionTier {
+  FREE
+  STARTER
+  PRO
+  ENTERPRISE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  TRIALING
+  INCOMPLETE
+}
+
+model PricingTier {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  description     String?
+  monthlyPrice   Int      // in cents
+  yearlyPrice    Int      // in cents
+  stripePriceIdMonthly  String? @unique
+  stripePriceIdYearly   String? @unique
+  maxCampaigns    Int      @default(1)
+  maxRedditAccounts Int   @default(1)
+  dailyPostLimit Int      @default(10)
+  features       String[]
+  isActive        Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  subscriptions   Subscription[]
+}
+
+model Subscription {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  pricingTierId       String
+  stripeSubscriptionId String? @unique
+  stripeCustomerId    String?
+  status              SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart  DateTime?
+  currentPeriodEnd    DateTime?
+  cancelAtPeriodEnd   Boolean  @default(false)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  user                User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pricingTier         PricingTier @relation(fields: [pricingTierId], references: [id])
+}
