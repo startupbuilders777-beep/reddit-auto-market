@@ -46,6 +46,8 @@ model Campaign {
   keywords      String[]
   subreddits    String[]
   dailyLimit    Int       @default(10)
+  maxLength     Int       @default(200)
+  blockedKeywords String[] @default([])
   status        CampaignStatus @default(ACTIVE)
   tone          String    @default("helpful")
   createdAt     DateTime  @default(now())

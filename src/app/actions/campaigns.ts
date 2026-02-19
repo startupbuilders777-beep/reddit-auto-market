@@ -10,6 +10,8 @@ export async function createCampaign(data: {
   keywords: string[]
   subreddits: string[]
   dailyLimit: number
+  maxLength: number
+  blockedKeywords: string[]
   tone: string
 }) {
   const session = await getServerSession(authOptions)
@@ -25,6 +27,8 @@ export async function createCampaign(data: {
       keywords: data.keywords,
       subreddits: data.subreddits,
       dailyLimit: data.dailyLimit,
+      maxLength: data.maxLength || 200,
+      blockedKeywords: data.blockedKeywords || [],
       tone: data.tone,
       status: 'ACTIVE',
     },
@@ -39,6 +43,8 @@ export async function updateCampaign(id: string, data: Partial<{
   keywords: string[]
   subreddits: string[]
   dailyLimit: number
+  maxLength: number
+  blockedKeywords: string[]
   tone: string
   status: string
 }>) {
