@@ -183,7 +183,7 @@ export default function SettingsPage() {
                 {/* Usage Bar */}
                 <div>
                   <div className="flex justify-between text-sm mb-2">
-                    <span>This Month's Usage</span>
+                    <span>This Month&apos;s Usage</span>
                     <span>{stats.usage.commentsThisMonth} / {stats.subscription.pricingTier.commentsPerMonth} comments</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-3">
@@ -194,7 +194,7 @@ export default function SettingsPage() {
                   </div>
                   {usagePercent > 80 && (
                     <p className="text-sm text-orange-600 mt-2">
-                      You're approaching your monthly limit. Consider upgrading your plan.
+                      You are approaching your monthly limit. Consider upgrading your plan.
                     </p>
                   )}
                 </div>
