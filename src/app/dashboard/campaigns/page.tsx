@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import { Plus, MessageSquare, TrendingUp, Settings, Users } from 'lucide-react'
+import CampaignExportButton from '@/components/CampaignExportButton'
 
 export default async function CampaignsPage() {
   const session = await getServerSession(authOptions)
@@ -26,13 +27,16 @@ export default async function CampaignsPage() {
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Campaigns</h1>
-        <Link
-          href="/dashboard/campaigns/new"
-          className="flex items-center gap-2 bg-reddit hover:bg-redditDark text-white px-4 py-2 rounded-lg"
-        >
-          <Plus className="w-5 h-5" />
-          New Campaign
-        </Link>
+        <div className="flex items-center gap-4">
+          <CampaignExportButton />
+          <Link
+            href="/dashboard/campaigns/new"
+            className="flex items-center gap-2 bg-reddit hover:bg-redditDark text-white px-4 py-2 rounded-lg"
+          >
+            <Plus className="w-5 h-5" />
+            New Campaign
+          </Link>
+        </div>
       </div>
 
       {/* Campaign Stats */}

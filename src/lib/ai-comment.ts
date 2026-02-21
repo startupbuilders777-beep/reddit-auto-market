@@ -8,23 +8,31 @@ export interface CommentContext {
   postTitle: string
   postContent: string
   subreddit: string
-  tone: 'helpful' | 'casual' | 'professional'
+  tone: 'helpful' | 'casual' | 'professional' | 'humorous'
+  maxLength?: number
+  blockedKeywords?: string[]
 }
 
 const toneInstructions = {
   helpful: 'Be genuinely helpful and supportive. Offer actual value.',
   casual: 'Be friendly and conversational. Use casual language.',
   professional: 'Be professional and concise. Stick to the facts.',
+  humorous: 'Be witty and entertaining while still being helpful. Use humor naturally.',
 }
 
 export async function generateComment(context: CommentContext, customPrompt?: string): Promise<string> {
+  const maxLength = context.maxLength || 200
+  const blockedKeywordsText = context.blockedKeywords && context.blockedKeywords.length > 0
+    ? `\n- IMPORTANT: Do NOT use these keywords: ${context.blockedKeywords.join(', ')}`
+    : ''
+
   const systemPrompt = `You are writing a Reddit comment to help market a product/app. 
 ${toneInstructions[context.tone]}
 - Do NOT sound like spam or salesy
 - Be authentic and helpful first, mention the product naturally if relevant
-- Keep comments under 200 words
+- Keep comments under ${maxLength} words
 - Never be pushy or aggressive
-- Focus on providing value`
+- Focus on providing value${blockedKeywordsText}`
 
   const userPrompt = customPrompt || `
 Post Title: ${context.postTitle}
@@ -41,10 +49,25 @@ Write a helpful comment that could naturally lead to mentioning a relevant tool/
         { role: 'user', content: userPrompt },
       ],
       temperature: 0.7,
-      max_tokens: 300,
+      max_tokens: 400,
     })
 
-    return completion.choices[0]?.message?.content || ''
+    let comment = completion.choices[0]?.message?.content || ''
+    
+    // Post-process: truncate if exceeds maxLength
+    if (comment.length > maxLength) {
+      comment = comment.substring(0, maxLength - 3) + '...'
+    }
+    
+    // Remove blocked keywords if somehow included
+    if (context.blockedKeywords && context.blockedKeywords.length > 0) {
+      for (const keyword of context.blockedKeywords) {
+        const regex = new RegExp(keyword, 'gi')
+        comment = comment.replace(regex, '[blocked]')
+      }
+    }
+
+    return comment
   } catch (error) {
     console.error('Error generating comment:', error)
     return ''
