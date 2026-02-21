@@ -1,16 +1,20 @@
 import Link from 'next/link'
 import { MessageSquare } from 'lucide-react'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full p-8 bg-white rounded-xl shadow-sm">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-md w-full p-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
+        <div className="flex justify-end mb-4">
+          <ThemeToggle />
+        </div>
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-reddit rounded-xl mb-4">
             <MessageSquare className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold">Sign in to RedditAutoMarket</h1>
-          <p className="text-gray-500 mt-2">Automate your Reddit marketing</p>
+          <p className="text-gray-500 dark:text-gray-400 mt-2">Automate your Reddit marketing</p>
         </div>
 
         <div className="space-y-4">
@@ -29,24 +33,24 @@ export default function LoginPage() {
               <div className="w-full border-t border-gray-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">or</span>
+              <span className="px-2 bg-white dark:bg-gray-800 text-gray-500">or</span>
             </div>
           </div>
 
           <form className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+              <label className="block text-sm font-medium mb-1 dark:text-gray-200">Email</label>
               <input
                 type="email"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="you@example.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Password</label>
+              <label className="block text-sm font-medium mb-1 dark:text-gray-200">Password</label>
               <input
                 type="password"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 placeholder="••••••••"
               />
             </div>
@@ -59,7 +63,7 @@ export default function LoginPage() {
           </form>
         </div>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
           Don&apos;t have an account?{' '}
           <Link href="/register" className="text-reddit hover:underline">
             Sign up

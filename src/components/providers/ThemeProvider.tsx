@@ -8,9 +8,17 @@ interface ThemeContextType {
   theme: Theme
   toggleTheme: () => void
   setTheme: (theme: Theme) => void
+  mounted: boolean
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+const defaultValue: ThemeContextType = {
+  theme: 'light',
+  toggleTheme: () => {},
+  setTheme: () => {},
+  mounted: false,
+}
+
+const ThemeContext = createContext<ThemeContextType>(defaultValue)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>('light')
@@ -48,22 +56,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
 
-  // Prevent flash of wrong theme
-  if (!mounted) {
-    return <>{children}</>
+  const value: ThemeContextType = {
+    theme,
+    toggleTheme,
+    setTheme,
+    mounted,
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
   )
 }
 
 export function useTheme() {
-  const context = useContext(ThemeContext)
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider')
-  }
-  return context
+  return useContext(ThemeContext)
 }

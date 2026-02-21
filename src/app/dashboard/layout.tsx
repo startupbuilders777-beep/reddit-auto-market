@@ -11,6 +11,7 @@ import {
   Users
 } from 'lucide-react'
 import { signOut } from 'next-auth/react'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 const navigation = [
   { name: 'Overview', href: '/dashboard', icon: LayoutDashboard },
@@ -34,7 +35,10 @@ export default function DashboardLayout({
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b border-gray-800">
-            <h1 className="text-xl font-bold">RedditAutoMarket</h1>
+            <div className="flex items-center justify-between">
+              <h1 className="text-xl font-bold">RedditAutoMarket</h1>
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Navigation */}
