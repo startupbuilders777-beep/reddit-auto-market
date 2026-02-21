@@ -28,9 +28,9 @@ export default function DashboardLayout({
   const pathname = usePathname()
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
       {/* Sidebar */}
-      <div className="fixed inset-y-0 left-0 w-64 bg-gray-900 text-white">
+      <div className="fixed inset-y-0 left-0 w-64 bg-gray-900 dark:bg-gray-950 text-white">
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="p-6 border-b border-gray-800">
@@ -73,7 +73,7 @@ export default function DashboardLayout({
 
       {/* Main Content */}
       <div className="ml-64 p-8">
-        {children}
+        <div className="dark:text-white">{children}</div>
       </div>
     </div>
   )

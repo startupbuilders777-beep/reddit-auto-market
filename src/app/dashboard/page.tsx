@@ -69,19 +69,19 @@ export default async function DashboardPage() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-xl shadow-sm">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
           <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
           <div className="space-y-3">
             <Link
               href="/dashboard/campaigns/new"
-              className="block p-4 border border-gray-200 rounded-lg hover:border-reddit transition"
+              className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-reddit transition"
             >
               <span className="font-medium">Create New Campaign</span>
               <p className="text-sm text-gray-500">Set up automated Reddit marketing</p>
             </Link>
             <Link
               href="/dashboard/accounts/add"
-              className="block p-4 border border-gray-200 rounded-lg hover:border-reddit transition"
+              className="block p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-reddit transition"
             >
               <span className="font-medium">Connect Reddit Account</span>
               <p className="text-sm text-gray-500">Add another account for posting</p>
@@ -89,16 +89,16 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow-sm">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
           <h2 className="text-lg font-semibold mb-4">Tips</h2>
           <div className="space-y-3">
-            <div className="flex gap-3 p-3 bg-blue-50 rounded-lg">
-              <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0" />
-              <p className="text-sm text-blue-800">Start with 2-3 subreddits to avoid spreading too thin</p>
+            <div className="flex gap-3 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+              <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+              <p className="text-sm text-blue-800 dark:text-blue-300">Start with 2-3 subreddits to avoid spreading too thin</p>
             </div>
-            <div className="flex gap-3 p-3 bg-green-50 rounded-lg">
-              <AlertCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-              <p className="text-sm text-green-800">Use a helpful tone - it gets 3x more engagement</p>
+            <div className="flex gap-3 p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <AlertCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+              <p className="text-sm text-green-800 dark:text-green-300">Use a helpful tone - it gets 3x more engagement</p>
             </div>
           </div>
         </div>
@@ -109,10 +109,10 @@ export default async function DashboardPage() {
 
 function StatCard({ title, value, icon }: { title: string; value: number; icon: React.ReactNode }) {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
       <div className="flex justify-between items-start">
         <div>
-          <p className="text-sm text-gray-500 mb-1">{title}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">{title}</p>
           <p className="text-3xl font-bold">{value}</p>
         </div>
         <div className="text-gray-400">{icon}</div>
