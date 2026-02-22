@@ -33,19 +33,27 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <form className="space-y-4">
+          <form className="space-y-4" aria-label="Sign in with email">
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
               <input
+                id="email"
+                name="email"
                 type="email"
+                autoComplete="email"
+                required
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
                 placeholder="you@example.com"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Password</label>
+              <label htmlFor="password" className="block text-sm font-medium mb-1">Password</label>
               <input
+                id="password"
+                name="password"
                 type="password"
+                autoComplete="current-password"
+                required
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
                 placeholder="••••••••"
               />

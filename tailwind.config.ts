@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,8 +12,10 @@ const config: Config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        reddit: '#FF4500',
+        // Reddit brand color - adjusted for better contrast
+        reddit: '#E03E00',
         redditDark: '#CC3700',
+        redditLight: '#FF6B4A',
       },
     },
   },
