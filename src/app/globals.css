@@ -89,6 +89,16 @@ body {
   background-color: #f97316;
 }
 
+/* Background and foreground for dark mode */
+.dark \[aria-labelledby\] {
+  color: var(--foreground);
+}
+
+/* Dark mode card styles */
+.dark .bg-gray-950 {
+  background-color: #030712;
+}
+
 /* Accessibility: Focus states */
 a:focus-visible,
 button:focus-visible,
@@ -122,4 +132,23 @@ textarea:focus-visible {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animation for pulse */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
