@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
-import { Plus, MessageSquare, TrendingUp, Settings, Users, Calendar } from 'lucide-react'
+import { Plus, MessageSquare, TrendingUp, Settings, Users } from 'lucide-react'
 import CampaignExportButton from '@/components/CampaignExportButton'
 
 export default async function CampaignsPage() {
@@ -28,13 +28,6 @@ export default async function CampaignsPage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold">Campaigns</h1>
         <div className="flex items-center gap-4">
-          <Link
-            href="/dashboard/campaigns/calendar"
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-          >
-            <Calendar className="w-5 h-5" />
-            Calendar
-          </Link>
           <CampaignExportButton />
           <Link
             href="/dashboard/campaigns/new"

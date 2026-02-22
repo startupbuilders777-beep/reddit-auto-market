@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useSession, signOut } from 'next-auth/react'
-import { ThemeToggle } from '@/components/ThemeToggle'
 
 interface RedditAccount {
   id: string
@@ -109,7 +108,7 @@ export default function SettingsPage() {
       ) : (
         <>
           {/* Connected Accounts */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm mb-6">
+          <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Connected Reddit Accounts</h2>
               <a
@@ -160,30 +159,16 @@ export default function SettingsPage() {
             )}
           </div>
 
-          {/* Theme Settings */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm mb-6">
-            <h2 className="text-lg font-semibold mb-4">Appearance</h2>
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="font-medium">Dark Mode</div>
-                <div className="text-sm text-gray-500">
-                  Switch between light and dark themes
-                </div>
-              </div>
-              <ThemeToggle />
-            </div>
-          </div>
-
           {/* Usage & Subscription */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm mb-6">
+          <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
             <h2 className="text-lg font-semibold mb-4">Subscription & Usage</h2>
             
             {stats?.subscription ? (
               <div className="space-y-4">
-                <div className="flex justify-between items-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
                   <div>
                     <div className="font-medium">{stats.subscription.pricingTier.name} Plan</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                    <div className="text-sm text-gray-500">
                       ${stats.subscription.pricingTier.priceMonthly}/month
                       {stats.subscription.status === 'ACTIVE' && stats.subscription.currentPeriodEnd && (
                         <> • Renews {new Date(stats.subscription.currentPeriodEnd).toLocaleDateString()}</>
@@ -201,7 +186,7 @@ export default function SettingsPage() {
                     <span>This Month&apos;s Usage</span>
                     <span>{stats.usage.commentsThisMonth} / {stats.subscription.pricingTier.commentsPerMonth} comments</span>
                   </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3">
+                  <div className="w-full bg-gray-200 rounded-full h-3">
                     <div 
                       className={`h-3 rounded-full transition-all ${usagePercent > 90 ? 'bg-red-500' : usagePercent > 70 ? 'bg-yellow-500' : 'bg-reddit'}`}
                       style={{ width: `${Math.min(usagePercent, 100)}%` }}
@@ -235,39 +220,37 @@ export default function SettingsPage() {
           </div>
 
           {/* Profile Section */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm mb-6">
-            <h2 className="text-lg font-semibold mb-4" id="profile-heading">Profile</h2>
-            <div className="space-y-4" role="group" aria-labelledby="profile-heading">
+          <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
+            <h2 className="text-lg font-semibold mb-4">Profile</h2>
+            <div className="space-y-4">
               <div>
-                <label htmlFor="settings-email" className="block text-sm font-medium mb-2">Email</label>
+                <label className="block text-sm font-medium mb-2">Email</label>
                 <input
-                  id="settings-email"
                   type="email"
                   defaultValue={session?.user?.email || ''}
                   disabled
-                  className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full px-4 py-2 border rounded-lg bg-gray-50"
                 />
               </div>
               <div>
-                <label htmlFor="settings-name" className="block text-sm font-medium mb-2">Name</label>
+                <label className="block text-sm font-medium mb-2">Name</label>
                 <input
-                  id="settings-name"
                   type="text"
                   defaultValue={session?.user?.name || ''}
                   disabled
-                  className="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600"
+                  className="w-full px-4 py-2 border rounded-lg bg-gray-50"
                 />
               </div>
             </div>
           </div>
 
           {/* Account Actions */}
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+          <div className="bg-white p-6 rounded-xl shadow-sm">
             <h2 className="text-lg font-semibold mb-4">Account Actions</h2>
             <div className="space-y-3">
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
-                className="w-full text-left px-4 py-3 border border-red-200 dark:border-red-800 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
+                className="w-full text-left px-4 py-3 border border-red-200 rounded-lg text-red-600 hover:bg-red-50"
               >
                 Sign Out
               </button>
