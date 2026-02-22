@@ -2,10 +2,14 @@
 
 import { useState, useMemo, useCallback } from 'react'
 import { Calendar, dateFnsLocalizer, Views, SlotInfo } from 'react-big-calendar'
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import { enUS } from 'date-fns/locale'
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, X, Clock, Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+
+// Wrap Calendar with drag and drop (using any type to avoid type conflicts with addon)
+const DnDCalendar = withDragAndDrop(Calendar) as any
 
 const locales = {
   'en-US': enUS,
@@ -181,7 +185,7 @@ export default function CampaignCalendar({
         </div>
       ) : (
         <div className="flex-1 bg-white rounded-lg shadow-sm p-4 overflow-hidden">
-          <Calendar
+          <DnDCalendar
             localizer={localizer}
             events={posts}
             startAccessor="start"
@@ -193,7 +197,10 @@ export default function CampaignCalendar({
             onNavigate={setDate}
             onSelectEvent={handleSelectEvent}
             onSelectSlot={handleSelectSlot}
+            onEventDrop={handleEventDrop}
+            onEventResize={handleEventDrop}
             selectable
+            resizable
             popup
             eventPropGetter={eventStyleGetter}
             components={{
