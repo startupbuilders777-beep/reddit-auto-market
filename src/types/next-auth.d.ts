@@ -8,6 +8,9 @@ declare module 'next-auth' {
       name?: string | null
       image?: string | null
     }
+    redditAccessToken?: string | undefined
+    redditRefreshToken?: string | undefined
+    redditUsername?: string | undefined
   }
 
   interface User {
@@ -21,5 +24,9 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   interface JWT {
     id?: string
+    redditAccessToken?: string
+    redditRefreshToken?: string
+    redditTokenExpiry?: number
+    redditUsername?: string
   }
 }
