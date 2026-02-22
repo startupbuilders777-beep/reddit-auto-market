@@ -18,7 +18,7 @@ export default function Home() {
           <h1 id="hero-heading" className="text-5xl font-bold mb-6">
             Automate Your Reddit Marketing
           </h1>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
             AI-powered tool that finds relevant posts and generates contextual comments 
             to grow your app&apos;s visibility. Save 20+ hours/week.
           </p>
@@ -94,7 +94,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8">
+      <footer className="bg-gray-900 text-gray-300 py-8">
         <div className="container mx-auto px-4 text-center">
           <p>© 2026 RedditAutoMarket. All rights reserved.</p>
         </div>
@@ -106,7 +106,7 @@ export default function Home() {
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 text-center">
-      <div className="text-reddit mb-4 flex justify-center">{icon}</div>
+      <div className="text-reddit mb-4 flex justify-center" aria-hidden="true">{icon}</div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
       <p className="text-gray-600">{description}</p>
     </div>

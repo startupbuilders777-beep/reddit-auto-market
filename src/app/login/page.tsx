@@ -16,6 +16,7 @@ export default function LoginPage() {
         <div className="space-y-4">
           <Link
             href="/api/auth/signin"
+            aria-label="Continue with Reddit"
             className="flex items-center justify-center gap-3 w-full py-3 px-4 bg-reddit hover:bg-redditDark text-white rounded-lg font-medium transition"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -24,7 +25,7 @@ export default function LoginPage() {
             Continue with Reddit
           </Link>
 
-          <div className="relative">
+          <div className="relative" aria-hidden="true">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-200"></div>
             </div>
@@ -42,6 +43,7 @@ export default function LoginPage() {
                 type="email"
                 autoComplete="email"
                 required
+                aria-required="true"
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
                 placeholder="you@example.com"
               />
@@ -54,6 +56,7 @@ export default function LoginPage() {
                 type="password"
                 autoComplete="current-password"
                 required
+                aria-required="true"
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
                 placeholder="••••••••"
               />
