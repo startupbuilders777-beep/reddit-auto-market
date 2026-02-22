@@ -236,11 +236,12 @@ export default function SettingsPage() {
 
           {/* Profile Section */}
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm mb-6">
-            <h2 className="text-lg font-semibold mb-4">Profile</h2>
-            <div className="space-y-4">
+            <h2 className="text-lg font-semibold mb-4" id="profile-heading">Profile</h2>
+            <div className="space-y-4" role="group" aria-labelledby="profile-heading">
               <div>
-                <label className="block text-sm font-medium mb-2">Email</label>
+                <label htmlFor="settings-email" className="block text-sm font-medium mb-2">Email</label>
                 <input
+                  id="settings-email"
                   type="email"
                   defaultValue={session?.user?.email || ''}
                   disabled
@@ -248,8 +249,9 @@ export default function SettingsPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Name</label>
+                <label htmlFor="settings-name" className="block text-sm font-medium mb-2">Name</label>
                 <input
+                  id="settings-name"
                   type="text"
                   defaultValue={session?.user?.name || ''}
                   disabled

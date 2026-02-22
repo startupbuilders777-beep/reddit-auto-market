@@ -4,10 +4,18 @@ import { MessageSquare, TrendingUp, Zap, BarChart3 } from 'lucide-react'
 export default function Home() {
   return (
     <main className="min-h-screen">
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-reddit focus:text-white focus:px-4 focus:py-2 focus:rounded"
+      >
+        Skip to main content
+      </a>
+
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-24">
+      <section className="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-24" aria-labelledby="hero-heading">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold mb-6">
+          <h1 id="hero-heading" className="text-5xl font-bold mb-6">
             Automate Your Reddit Marketing
           </h1>
           <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
@@ -32,9 +40,9 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <section id="features" className="py-20 bg-gray-50">
+      <section id="features" className="py-20 bg-gray-50" aria-labelledby="features-heading">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
+          <h2 id="features-heading" className="text-3xl font-bold text-center mb-12">How It Works</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <FeatureCard 
               icon={<MessageSquare className="w-8 h-8" />}
@@ -61,9 +69,9 @@ export default function Home() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20">
+      <section className="py-20" aria-labelledby="pricing-heading">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Simple Pricing</h2>
+          <h2 id="pricing-heading" className="text-3xl font-bold text-center mb-12">Simple Pricing</h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <PricingCard 
               name="Starter"

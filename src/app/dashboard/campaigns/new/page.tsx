@@ -72,10 +72,11 @@ export default function NewCampaignPage() {
       <h1 className="text-2xl font-bold mb-8">Create New Campaign</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <form action={handleSubmit} className="space-y-6">
+        <form action={handleSubmit} className="space-y-6" aria-label="Create new campaign">
         <div>
-            <label className="block text-sm font-medium mb-2">Campaign Name</label>
+            <label htmlFor="campaign-name" className="block text-sm font-medium mb-2">Campaign Name</label>
             <input
+              id="campaign-name"
               type="text"
               name="name"
               required
@@ -85,41 +86,45 @@ export default function NewCampaignPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label htmlFor="campaign-keywords" className="block text-sm font-medium mb-2">
               Keywords (comma separated)
             </label>
             <input
+              id="campaign-keywords"
               type="text"
               name="keywords"
               required
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
               placeholder="saas, startup, indie hacker"
             />
-            <p className="text-sm text-gray-500 mt-1">
+            <p id="keywords-help" className="text-sm text-gray-500 mt-1">
               Posts containing these keywords will be targeted
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label htmlFor="campaign-subreddits" className="block text-sm font-medium mb-2">
               Subreddits (comma separated)
             </label>
             <input
+              id="campaign-subreddits"
               type="text"
               name="subreddits"
               required
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
               placeholder="SaaS, startups, indiehackers"
+              aria-describedby="subreddits-help"
             />
-            <p className="text-sm text-gray-500 mt-1">
+            <p id="subreddits-help" className="text-sm text-gray-500 mt-1">
               Add subreddit names without r/
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-2">Daily Comment Limit</label>
+              <label htmlFor="campaign-dailyLimit" className="block text-sm font-medium mb-2">Daily Comment Limit</label>
               <input
+                id="campaign-dailyLimit"
                 type="number"
                 name="dailyLimit"
                 defaultValue={10}
@@ -130,8 +135,9 @@ export default function NewCampaignPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Comment Tone</label>
+              <label htmlFor="campaign-tone" className="block text-sm font-medium mb-2">Comment Tone</label>
               <select
+                id="campaign-tone"
                 name="tone"
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
               >
@@ -145,31 +151,35 @@ export default function NewCampaignPage() {
 
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium mb-2">Max Comment Length</label>
+              <label htmlFor="campaign-maxLength" className="block text-sm font-medium mb-2">Max Comment Length</label>
               <input
+                id="campaign-maxLength"
                 type="number"
                 name="maxLength"
                 defaultValue={200}
                 min={50}
                 max={500}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
+                aria-describedby="maxLength-help"
               />
-              <p className="text-sm text-gray-500 mt-1">
+              <p id="maxLength-help" className="text-sm text-gray-500 mt-1">
                 Maximum characters per comment
               </p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label htmlFor="campaign-blockedKeywords" className="block text-sm font-medium mb-2">
                 Blocked Keywords
               </label>
               <input
+                id="campaign-blockedKeywords"
                 type="text"
                 name="blockedKeywords"
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
                 placeholder="scam, fake, spam"
+                aria-describedby="blockedKeywords-help"
               />
-              <p className="text-sm text-gray-500 mt-1">
+              <p id="blockedKeywords-help" className="text-sm text-gray-500 mt-1">
                 AI will avoid these words
               </p>
             </div>
@@ -194,16 +204,17 @@ export default function NewCampaignPage() {
         </form>
 
         {/* Preview Section */}
-        <div className="bg-gray-50 p-6 rounded-xl">
-          <h2 className="text-lg font-semibold mb-4">AI Comment Preview</h2>
+        <div className="bg-gray-50 p-6 rounded-xl" aria-labelledby="preview-heading">
+          <h2 id="preview-heading" className="text-lg font-semibold mb-4">AI Comment Preview</h2>
           <p className="text-sm text-gray-600 mb-4">
             Test how your AI comments will look before creating the campaign.
           </p>
           
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Sample Post Title</label>
+              <label htmlFor="preview-title" className="block text-sm font-medium mb-2">Sample Post Title</label>
               <input
+                id="preview-title"
                 type="text"
                 value={samplePost.title}
                 onChange={(e) => setSamplePost({ ...samplePost, title: e.target.value })}
@@ -213,8 +224,9 @@ export default function NewCampaignPage() {
             </div>
             
             <div>
-              <label className="block text-sm font-medium mb-2">Sample Post Content (optional)</label>
+              <label htmlFor="preview-content" className="block text-sm font-medium mb-2">Sample Post Content (optional)</label>
               <textarea
+                id="preview-content"
                 value={samplePost.content}
                 onChange={(e) => setSamplePost({ ...samplePost, content: e.target.value })}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-reddit focus:border-transparent"
@@ -224,8 +236,9 @@ export default function NewCampaignPage() {
             </div>
             
             <div>
-              <label className="block text-sm font-medium mb-2">Subreddit</label>
+              <label htmlFor="preview-subreddit" className="block text-sm font-medium mb-2">Subreddit</label>
               <input
+                id="preview-subreddit"
                 type="text"
                 value={samplePost.subreddit}
                 onChange={(e) => setSamplePost({ ...samplePost, subreddit: e.target.value })}
